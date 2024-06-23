@@ -1,10 +1,12 @@
 <template>
     <div class="signup-container">
       <h2>Login</h2>
-      <form @submit.prevent="loginUser">
+      <form @submit.prevent="loginUser"> 
+          // event handler for submit button
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" id="username" v-model="username" required>
+            <input type="text" id="username" v-model="username" required> 
+            // v-model binding of username
         </div>
         
         <div class="form-group">
@@ -42,7 +44,15 @@
 
         localStorage.setItem("access_token",access_token)
         localStorage.setItem("user_info", JSON.stringify(user))
-        this.$router.push('/')
+          // toast to display message
+          this.$toast.success('Login Succesful', {
+                        position: 'top-right',
+                        duration: 3000,
+                    });
+        if (user.role == 'user'){this.$router.push('/user/dashboard')}
+        else if (user.role == 'artist') {this.$router.push('/artist/dashboard')}
+        else if (user.role == 'admin') {this.$router.push('/admin/dashboard')}
+          
       })
       .catch((error)=> "something went wrong" + error)
       
