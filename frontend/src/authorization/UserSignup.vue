@@ -2,6 +2,11 @@
     <div class="signup-container">
       <h2>SignUp</h2>
       <form @submit.prevent="signupUser">
+
+         <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" v-model="name" required>
+        </div> 
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" v-model="username" required>
@@ -18,14 +23,11 @@
         
         <button type="submit">Sign Up</button>
       </form>
-      <div v-if="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
+     
     </div>
   </template>
   
   <script>
-  // import axios from 'axios';
   
   export default{
     data(){
@@ -33,8 +35,8 @@
         username:'',
         email:'',
         password:'',
-        role:'user',
         errorMessage:'',
+        name: ''
       };
     },
     methods:{
@@ -44,8 +46,13 @@
             username: this.username,
             email: this.email,
             password: this.password,
-            role:this.role
+            name: this.name,
+
           });
+        this.$toast.success('User Signed up Successfully!!', {
+                        position: 'top-right',
+                        duration: 5000,
+                    });
           this.$router.push('/login');
         } catch(error){
           this.errorMessage = error.response ? error.response.data.message:'Signup Failed.Please try again'
