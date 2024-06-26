@@ -68,7 +68,7 @@ mail = Mail(app)
 def send_email():
   msg = Message(
     'Hello',
-    recipients=['21f3000028@ds.study.iitm.ac.in','21f3001238@ds.study.iitm.ac.in'],
+    recipients=['21f3000028@ds.study.iitm.ac.in','rollnumber@ds.study.iitm.ac.in'],
     body='This is a test email sent from Flask-Mail!'
   )
   # attach a pdf file 
